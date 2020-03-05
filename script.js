@@ -44,12 +44,34 @@ video.addEventListener("play", () => {
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
     faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+    // faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
     resizedDetections.forEach(detection => {
       const box = detection.detection.box;
       const drawBox = new faceapi.draw.DrawBox(box, {
         label: Math.round(detection.age) + " year old " + detection.gender
       });
+      var age = Math.round(detection.age);
+      var myvid;
+      console.log(age);
+      // $("#myvid").html(`<h1>${age}</h1>`);
+      window.localStorage.setItem("hello", age);
+      if (age < 15) {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=1";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=1");
+      } else if (age < 27) {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=2";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=2");
+      } else if (age < 50) {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=3";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=3");
+      } else {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=4";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=4");
+      }
       drawBox.draw(canvas);
     });
   }, 100);
