@@ -33,6 +33,7 @@ var max = 0;
 var total = 0;
 var age = 10;
 var exp;
+var ongoing = true;
 
 video.addEventListener("play", () => {
   const canvas = faceapi.createCanvasFromMedia(video);
@@ -68,11 +69,18 @@ video.addEventListener("play", () => {
 
       drawBox.draw(canvas);
     });
-    console.log("TOTAL ==>>\t" + k);
+    // console.log("TOTAL ==>>\t" + k);
+
+    // ========================================================================================================
+
+    //TODO
+    // ongoing = checkOngoing();
+
+    // ========================================================================================================
 
     //slowed down initial ====>>>>> 100
-    updateStats(true);
-    // getPrediction(age);
+    updateStats(ongoing);
+    // updateAD(age);
 
     // initAll();
   }, 400);
@@ -106,6 +114,7 @@ function updateStats(ongoing) {
     }
     total += k;
 
+    //check expressions
     if (exp.happy > 0.5) {
       happy++;
     }
@@ -124,11 +133,14 @@ function updateStats(ongoing) {
 
     // console.log(happy + " " + sad);
   } else {
+    playNext = nextAD.pop();
+    nextAD = ["default", nextAD.pop()];
+    pushStats();
     initAll();
   }
 }
 
-function getPrediction(age) {
+function updateAD(age) {
   if (age < 16) {
     yng++;
     nextAD.push("youngAD");
@@ -144,43 +156,28 @@ function getPrediction(age) {
   }
 }
 
-// const video = document.getElementById("video");
+var analytics;
 
-// Promise.all([
-//   faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-//   faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-//   faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-//   faceapi.nets.faceExpressionNet.loadFromUri("/models")
-// ]).then(startVideo);
+function pushStats() {
+  happy /= total;
+  sad /= total;
+  angry /= total;
+  fear /= total;
+  disg /= total;
 
-// function startVideo() {
-//   navigator.getUserMedia(
-//     { video: {} },
-//     stream => (video.srcObject = stream),
-//     err => console.error(err)
-//   );
-// }
-// startVideo();
+  if (old > popAge) popAge = old;
+  if (yng > popAge) popAge = yng;
+  if (mid > popAge) popAge = mid;
+  if (superold > popAge) popAge = superold;
 
-// video.addEventListener("play", () => {
-//   const canvas = faceapi.createCanvasFromMedia(video);
-//   document.body.append(canvas);
-//   const displaySize = { width: video.width, height: video.height };
-//   faceapi.matchDimensions(canvas, displaySize);
-//   setInterval(async () => {
-//     // const detectionsWithAgeAndGender = await faceapi
-//     //   .detectAllFaces(input)
-//     //   .withFaceLandmarks()
-//     //   .withAgeAndGender();
-//     const detections = await faceapi
-//       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
-//       .withFaceLandmarks()
-//       .withFaceExpressions();
-//     const resizedDetections = faceapi.resizeResults(detections, displaySize);
-//     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-//     faceapi.draw.drawDetections(canvas, resizedDetections);
-//     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-
-//     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
-//   }, 100);
-// });
+  analytics = {
+    exp: {
+      happy: happy,
+      sad: sad,
+      angry: angry,
+      fear: fear,
+      disg: disg
+    },
+    age: popAge
+  };
+}
