@@ -55,6 +55,7 @@ video.addEventListener("play", () => {
       console.log(age);
       // $("#myvid").html(`<h1>${age}</h1>`);
       window.localStorage.setItem("hello", age);
+      document.getElementById("age").innerHTML = age;
       if (age < 15) {
         // myvid = document.getElementById("vid");
         // myvid.src = "http://localhost:3001/video?age=1";
