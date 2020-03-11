@@ -114,6 +114,8 @@ function updateStats(ongoing) {
     }
     total += k;
 
+    // console.log(exp.happy);
+
     //check expressions
     if (exp.happy > 0.5) {
       happy++;
