@@ -60,34 +60,13 @@ video.addEventListener("play", () => {
         label: Math.round(detection.age) + " year old " + detection.gender
       });
       age = Math.round(detection.age);
+      document.getElementById("age").innerHTML = age;
       // console.log(detection.expressions);
       exp = detection.expressions;
       var myvid;
       console.log(age);
       // $("#myvid").html(`<h1>${age}</h1>`);
       window.localStorage.setItem("hello", age);
-<<<<<<< HEAD
-      document.getElementById("age").innerHTML = age;
-      if (age < 15) {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=1";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=1");
-      } else if (age < 27) {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=2";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=2");
-      } else if (age < 50) {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=3";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=3");
-      } else {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=4";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=4");
-      }
-=======
-
->>>>>>> 68cfff288e87d4c1b9daefe4ad1288d76f0d4100
       drawBox.draw(canvas);
     });
     // console.log("TOTAL ==>>\t" + k);
