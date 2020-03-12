@@ -66,7 +66,7 @@ video.addEventListener("play", () => {
       console.log(age);
       // $("#myvid").html(`<h1>${age}</h1>`);
       window.localStorage.setItem("hello", age);
-<<<<<<< HEAD
+      
       document.getElementById("age").innerHTML = age;
       if (age < 15) {
         // myvid = document.getElementById("vid");
@@ -85,9 +85,7 @@ video.addEventListener("play", () => {
         // myvid.src = "http://localhost:3001/video?age=4";
         // $("#myvid").attr("src", "http://localhost:3001/video?age=4");
       }
-=======
 
->>>>>>> 68cfff288e87d4c1b9daefe4ad1288d76f0d4100
       drawBox.draw(canvas);
     });
     // console.log("TOTAL ==>>\t" + k);

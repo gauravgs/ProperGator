@@ -60,10 +60,10 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active nav-item" id="home"><a href="#"><i class="feather icon-home"></i><span
+                <li class="nav-item" id="home"><a href="./dashboard.html"><i class="feather icon-home"></i><span
                             class="menu-title" data-i18n="Table">Home</span></a>
                 </li>
-                <li class=" nav-item" id="createCampaign"><a href="#"><i class="feather icon-file"></i><span
+                <li class="active nav-item" id="createCampaign"><a href="#"><i class="feather icon-file"></i><span
                             class="menu-title" data-i18n="Datatable">Create a Campaign</span></a>
                 </li>
                 <li class="nav-item" id="viewAllCampaign"><a href="#"><i class="feather icon-file-text"></i><span
@@ -140,7 +140,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Recent Campaigns</h2>
+                        <h2 class="content-header-title float-left mb-0">Create Campaign</h2>
                     </div>
                 </div>
             </div>
@@ -157,12 +157,70 @@
                         </div>
                         <br />
                         <div class="row align-items-center justify-content-center">
-                            <div class="col-lg-3 md-6 ">
-                                <button type="button" class="btn btn-primary "
-                                    onclick="location.href='./underConstruction.html'">View All</button>
 
-
+                            <div id="createCampaign">
+                                <div class="col-md-12 col-12">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Video URL</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="vurl" class="form-control"
+                                                                        name="vurl" placeholder="Video URL">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Age Category</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <select class="custom-select form-control"
+                                                                        id="category" name="location">
+                                                                        <option value="">--Select Age--</option>
+                                                                        <option value="1">Childern ( below 15 years)
+                                                                        </option>
+                                                                        <option value="2">Youngsters ( 15 to 27
+                                                                            years)</option>
+                                                                        <option value="3">Adult (27 to 50 years)
+                                                                        </option>
+                                                                        <option value="4">Old Age (above 50 years)
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Mobile</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="number" id="contact-info"
+                                                                        class="form-control" name="contact"
+                                                                        placeholder="Mobile">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 offset-md-4">
+                                                            <button onclick="createCampign()"
+                                                                class="btn btn-primary mr-1 mb-1">Create</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </section>
 
@@ -194,28 +252,24 @@
 
     <!--Dynamic Quick View-->
     <script>
-
-        $(document).ready(function () {
-
-            $('#createCampaign').click(function () {
-                window.location.href = './createCampaign.html';
-            });
-
-            $('#viewCampaign').click(function () {
-                window.location.href = './underConstruction.html';
-            });
-
-            $('#viewAllCampaign').click(function () {
-                window.location.href = './underConstruction.html';
-            });
+        $('#createCampaign').click(function () {
+            window.location.href = '#';
         });
 
-        $(document).ready(function () {
-            $.getJSON('##campaign api url', function (data) {
-                console.log(data);
-
-            })
+        $('#viewCampaign').click(function () {
+            window.location.href = './underConstruction.html';
         });
+
+        $('#viewAllCampaign').click(function () {
+            window.location.href = './underConstruction.html';
+        });
+
+        function createCampign() {
+            let vurl = document.getElementById('vurl').value;
+            let category = document.getElementById('category').value;
+            console.log(vurl + category);
+            $.getJSON('https://propoback.herokuapp.com/addNewAd?src=' + vurl + '&category=' + category, function (f) { console.log("A") });
+        }; 
     </script>
 
 
