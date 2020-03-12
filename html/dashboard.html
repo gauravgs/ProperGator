@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="DevsNotWizard">
-    <title>TEMPLATE</title>
+    <title>Dashboard</title>
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -199,7 +199,6 @@
                 console.log(data);
                 var arr = []
                 Object.keys(data).forEach(function (key) {
-
                     arr.push(data[key])
                 })
 
@@ -210,12 +209,14 @@
                     <div class="col-sm-4">
                         <div class="card border-primary mb-3"">
                             <div class="card-body">
-                                <h5 class="card-header border-primary mb-3"><b>Campign ${i++}</b></h5>
-                                <iframe width="280" height="240" src=${d.src} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <p class="card-text"><b>Video URL:</b> ${d.src}<br><b>Category:</b> ${d.category}</p>
-                    </div>
-                </div>
-            </div>`)
+                                <h5 class="card-header mb-2"><b>${d.name}</b></h5>
+                                <iframe width="280" height="240" src= ${d.src} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p class="card-text"><b>Video URL: </b>${d.src}</p>
+                                <p class="card-text"><b>Category: </b>${d.category}</p>
+                                <p class="card-text"><b>Gender: </b>${d.gender}</p>
+                            </div>
+                        </div>
+                    </div>`)
                 })
             })
         });

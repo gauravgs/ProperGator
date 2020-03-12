@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="DevsNotWizard">
-    <title>TEMPLATE</title>
+    <title>Create Campaign</title>
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -165,6 +165,17 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
+                                                                    <span>Campaign Name</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="name" class="form-control"
+                                                                        placeholder="Campaign Name">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
                                                                     <span>Video URL</span>
                                                                 </div>
                                                                 <div class="col-md-8">
@@ -197,12 +208,16 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Mobile</span>
+                                                                    <span>Gender</span>
                                                                 </div>
                                                                 <div class="col-md-8">
-                                                                    <input type="number" id="contact-info"
-                                                                        class="form-control" name="contact"
-                                                                        placeholder="Mobile">
+                                                                    <select class="custom-select form-control"
+                                                                        id="gender" name="location">
+                                                                        <option value="">--Select Gender--</option>
+                                                                        <option value="male">Male</option>
+                                                                        <option value="female">Female</option>
+                                                                        <option value="all">All</option>
+                                                                    </select>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -262,10 +277,20 @@
         });
 
         function createCampign() {
+            let name = document.getElementById('name').value;
             let vurl = document.getElementById('vurl').value;
             let category = document.getElementById('category').value;
-            console.log(vurl + category);
-            $.getJSON('https://propoback.herokuapp.com/addNewAd?src=' + vurl + '&category=' + category, function (f) { console.log("A") });
+            let gender = document.getElementById('gender').value;
+            if (name !== '' && category !== '' && vurl !== '' && gender !== '') {
+                $.getJSON('https://propoback.herokuapp.com/addNewAd?src=' + vurl + '&category=' + category + '&name=' + name + '&gender=' + gender, function (f) { console.log("A") });
+                alert("Campaign Created!");
+            } else {
+                alert("Please fill all details");
+            }
+            document.getElementById('name').value = '';
+            document.getElementById('vurl').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('gender').value = '';
         }; 
     </script>
 
