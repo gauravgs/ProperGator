@@ -66,9 +66,6 @@
                 <li class=" nav-item" id="createCampaign"><a href="#"><i class="feather icon-file"></i><span
                             class="menu-title" data-i18n="Datatable">Create a Campaign</span></a>
                 </li>
-                <li class="nav-item" id="viewAllCampaign"><a href="#"><i class="feather icon-file-text"></i><span
-                            class="menu-item" data-i18n="Login">View All Campaign</span></a>
-                </li>
             </ul>
         </div>
     </div>
@@ -151,18 +148,9 @@
                     <!-- Paste your content divs here    ****************************  -->
 
                     <section id="basic-examples">
-                        <div class="row match-height" id="quick-tender">
+                        <div class="row match-height" id="quick-card">
 
 
-                        </div>
-                        <br />
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-lg-3 md-6 ">
-                                <button type="button" class="btn btn-primary "
-                                    onclick="location.href='./underConstruction.html'">View All</button>
-
-
-                            </div>
                         </div>
                     </section>
 
@@ -204,16 +192,31 @@
             $('#viewCampaign').click(function () {
                 window.location.href = './underConstruction.html';
             });
-
-            $('#viewAllCampaign').click(function () {
-                window.location.href = './underConstruction.html';
-            });
         });
 
         $(document).ready(function () {
-            $.getJSON('##campaign api url', function (data) {
+            $.getJSON('https://propoback.herokuapp.com/getAd', function (data) {
                 console.log(data);
+                var arr = []
+                Object.keys(data).forEach(function (key) {
 
+                    arr.push(data[key])
+                })
+
+                var i = 1;
+
+                arr.map(function (d) {
+                    $("#quick-card").append(`
+                    <div class="col-sm-4">
+                        <div class="card border-primary mb-3"">
+                            <div class="card-body">
+                                <h5 class="card-header border-primary mb-3"><b>Campign ${i++}</b></h5>
+                                <iframe width="280" height="240" src=${d.src} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <p class="card-text"><b>Video URL:</b> ${d.src}<br><b>Category:</b> ${d.category}</p>
+                    </div>
+                </div>
+            </div>`)
+                })
             })
         });
     </script>
