@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="DevsNotWizard">
-    <title>Dashboard</title>
+    <title>Create Campaign</title>
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -60,10 +60,10 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active nav-item" id="home"><a href="#"><i class="feather icon-home"></i><span
+                <li class="nav-item" id="home"><a href="./dashboard.html"><i class="feather icon-home"></i><span
                             class="menu-title" data-i18n="Table">Home</span></a>
                 </li>
-                <li class=" nav-item" id="createCampaign"><a href="#"><i class="feather icon-file"></i><span
+                <li class="active nav-item" id="createCampaign"><a href="#"><i class="feather icon-file"></i><span
                             class="menu-title" data-i18n="Datatable">Create a Campaign</span></a>
                 </li>
             </ul>
@@ -137,7 +137,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Recent Campaigns</h2>
+                        <h2 class="content-header-title float-left mb-0">Create Campaign</h2>
                     </div>
                 </div>
             </div>
@@ -148,8 +148,90 @@
                     <!-- Paste your content divs here    ****************************  -->
 
                     <section id="basic-examples">
-                        <div class="row match-height" id="quick-card">
+                        <div class="row match-height" id="quick-tender">
 
+
+                        </div>
+                        <br />
+                        <div class="row align-items-center justify-content-center">
+
+                            <div id="createCampaign">
+                                <div class="col-md-12 col-12">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="form-body">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Campaign Name</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="name" class="form-control"
+                                                                        placeholder="Campaign Name">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Video URL</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="vurl" class="form-control"
+                                                                        name="vurl" placeholder="Video URL">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Age Category</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <select class="custom-select form-control"
+                                                                        id="category" name="location">
+                                                                        <option value="">--Select Age--</option>
+                                                                        <option value="1">Childern ( below 15 years)
+                                                                        </option>
+                                                                        <option value="2">Youngsters ( 15 to 27
+                                                                            years)</option>
+                                                                        <option value="3">Adult (27 to 50 years)
+                                                                        </option>
+                                                                        <option value="4">Old Age (above 50 years)
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Gender</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <select class="custom-select form-control"
+                                                                        id="gender" name="location">
+                                                                        <option value="">--Select Gender--</option>
+                                                                        <option value="male">Male</option>
+                                                                        <option value="female">Female</option>
+                                                                        <option value="all">All</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8 offset-md-4">
+                                                            <button onclick="createCampign()"
+                                                                class="btn btn-primary mr-1 mb-1">Create</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
                     </section>
@@ -182,44 +264,34 @@
 
     <!--Dynamic Quick View-->
     <script>
-
-        $(document).ready(function () {
-
-            $('#createCampaign').click(function () {
-                window.location.href = './createCampaign.html';
-            });
-
-            $('#viewCampaign').click(function () {
-                window.location.href = './underConstruction.html';
-            });
+        $('#createCampaign').click(function () {
+            window.location.href = '#';
         });
 
-        $(document).ready(function () {
-            $.getJSON('https://propoback.herokuapp.com/getAd', function (data) {
-                console.log(data);
-                var arr = []
-                Object.keys(data).forEach(function (key) {
-                    arr.push(data[key])
-                })
-
-                var i = 1;
-
-                arr.map(function (d) {
-                    $("#quick-card").append(`
-                    <div class="col-sm-4">
-                        <div class="card border-primary mb-3"">
-                            <div class="card-body">
-                                <h5 class="card-header mb-2"><b>${d.name}</b></h5>
-                                <iframe width="280" height="240" src= ${d.src} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <p class="card-text"><b>Video URL: </b>${d.src}</p>
-                                <p class="card-text"><b>Category: </b>${d.category}</p>
-                                <p class="card-text"><b>Gender: </b>${d.gender}</p>
-                            </div>
-                        </div>
-                    </div>`)
-                })
-            })
+        $('#viewCampaign').click(function () {
+            window.location.href = './underConstruction.html';
         });
+
+        $('#viewAllCampaign').click(function () {
+            window.location.href = './underConstruction.html';
+        });
+
+        function createCampign() {
+            let name = document.getElementById('name').value;
+            let vurl = document.getElementById('vurl').value;
+            let category = document.getElementById('category').value;
+            let gender = document.getElementById('gender').value;
+            if (name !== '' && category !== '' && vurl !== '' && gender !== '') {
+                $.getJSON('https://propoback.herokuapp.com/addNewAd?src=' + vurl + '&category=' + category + '&name=' + name + '&gender=' + gender, function (f) { console.log("A") });
+                alert("Campaign Created!");
+            } else {
+                alert("Please fill all details");
+            }
+            document.getElementById('name').value = '';
+            document.getElementById('vurl').value = '';
+            document.getElementById('category').value = '';
+            document.getElementById('gender').value = '';
+        }; 
     </script>
 
 

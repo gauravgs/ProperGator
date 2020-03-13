@@ -68,6 +68,29 @@ video.addEventListener("play", () => {
       console.log(age);
       // $("#myvid").html(`<h1>${age}</h1>`);
       window.localStorage.setItem("hello", age);
+<<<<<<< HEAD
+=======
+      
+      document.getElementById("age").innerHTML = age;
+      if (age < 15) {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=1";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=1");
+      } else if (age < 27) {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=2";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=2");
+      } else if (age < 50) {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=3";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=3");
+      } else {
+        // myvid = document.getElementById("vid");
+        // myvid.src = "http://localhost:3001/video?age=4";
+        // $("#myvid").attr("src", "http://localhost:3001/video?age=4");
+      }
+
+>>>>>>> b786ec28d1bdf10c8ed2c62a3985dc437b0ed9e9
       drawBox.draw(canvas);
     });
     // console.log("TOTAL ==>>\t" + k);
