@@ -70,12 +70,6 @@
         justify-content: center;
         backface-visibility: hidden;
       }
-      .overlay-item .vo-question {
-        margin: 10px 0 40px 0;
-        width: 80%;
-        text-align: center;
-        line-height: 1.5;
-      }
     </style>
   </head>
   <body>
@@ -105,11 +99,18 @@
       age
     </h1> -->
     <div id="overlays-wrap">
-      <div class="overlay-item" data-overlayid="59" data-time="41">
-        <p class="vo-question" id="age">
-          AGE
-        </p>
-      </div>
+      <p
+        class="vo-question"
+        id="age"
+        style="position:fixed;
+            bottom:60px;
+            right:20px;
+            opacity:0.5;
+            z-index:99;"
+      >
+        AGE
+      </p>
+
       <img
         src="./logowhite.png"
         alt=""

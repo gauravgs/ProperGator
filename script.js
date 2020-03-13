@@ -34,6 +34,7 @@ var total = 0;
 var age = 10;
 var exp;
 var ongoing = true;
+var popAge = 0;
 
 video.addEventListener("play", () => {
   const canvas = faceapi.createCanvasFromMedia(video);
@@ -60,7 +61,7 @@ video.addEventListener("play", () => {
         label: Math.round(detection.age) + " year old " + detection.gender
       });
       age = Math.round(detection.age);
-      document.getElementById("age").innerHTML = age;
+
       // console.log(detection.expressions);
       exp = detection.expressions;
       var myvid;
@@ -79,11 +80,12 @@ video.addEventListener("play", () => {
     // ========================================================================================================
 
     //slowed down initial ====>>>>> 100
+    ongoing = true;
     updateStats(ongoing);
     // updateAD(age);
 
     // initAll();
-  }, 400);
+  }, 1000);
 });
 
 var nextAD = ["default"];
@@ -105,56 +107,88 @@ function initAll() {
   surp = 0;
   fear = 0;
   disg = 0;
+
+  // nextAD = [
+  //   ""
+  // ];
 }
+var flag = 0;
 
 function updateStats(ongoing) {
-  if (ongoing) {
-    if (max < k) {
-      max = k;
-    }
-    total += k;
-
-    // console.log(exp.happy);
-
-    //check expressions
-    if (exp.happy > 0.5) {
-      happy++;
-    }
-    if (exp.sad > 0.5) {
-      sad++;
-    }
-    if (exp.angry > 0.5) {
-      angry++;
-    }
-    if (exp.disgusted > 0.5) {
-      disg++;
-    }
-    if (exp.fearful > 0.5) {
-      fear++;
-    }
-
-    // console.log(happy + " " + sad);
-  } else {
-    playNext = nextAD.pop();
-    nextAD = ["default", nextAD.pop()];
-    pushStats();
-    initAll();
+  if (max < k) {
+    max = k;
   }
+  total += k;
+
+  // console.log(exp.happy);
+
+  //check expressions
+  if (exp.happy > 0.5) {
+    happy++;
+  }
+  if (exp.sad > 0.5) {
+    sad++;
+  }
+  if (exp.angry > 0.5) {
+    angry++;
+  }
+  if (exp.disgusted > 0.5) {
+    disg++;
+  }
+  if (exp.fearful > 0.5) {
+    fear++;
+  }
+
+  // console.log(happy + " " + sad);
+  updateAD(age);
+}
+
+var old = 0,
+  yng = 0,
+  mid = 0,
+  superold = 0;
+
+function nextVid() {
+  playNext = nextAD.pop();
+  // nextAD = [
+  //   "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4",
+  //   nextAD.pop()
+  // ];
+  playVideo(playNext);
+  pushStats();
+  initAll();
+  console.log(playNext);
 }
 
 function updateAD(age) {
   if (age < 16) {
     yng++;
-    nextAD.push("youngAD");
+    console.log("yng");
+    document.getElementById("age").innerHTML = "Children";
+    nextAD.push(
+      "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4"
+    );
   } else if (age < 30) {
     mid++;
-    nextAD.push("midAD");
+    console.log("mid");
+    document.getElementById("age").innerHTML = "Young";
+    nextAD.push(
+      "https://res.cloudinary.com/dztcftsli/video/upload/v1583983652/Inspiration_-_2016_Harley-Davidson_Motorcycles_twr67d.mp4"
+    );
   } else if (age < 50) {
+    document.getElementById("age").innerHTML = "Mid";
     old++;
-    nextAD.push("oldAD");
+    console.log("old");
+    nextAD.push(
+      "https://res.cloudinary.com/dztcftsli/video/upload/v1583984276/pay_r6smoi.mp4"
+    );
   } else {
+    console.log("super");
+    document.getElementById("age").innerHTML = "Old";
     superold++;
-    nextAD.push("SuperOldAD");
+    nextAD.push(
+      "https://res.cloudinary.com/dztcftsli/video/upload/v1583984281/travel_osq8yi.mp4"
+    );
   }
 }
 
@@ -182,4 +216,44 @@ function pushStats() {
     },
     age: popAge
   };
+}
+$(document).ready(function() {
+  playVideo(
+    "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4"
+  );
+});
+var currPlayer = videojs("my_video_1");
+function playVideo(url) {
+  //console.log("in vid", url);
+
+  var currPlayer = videojs("my_video_1");
+  $("#overlays-wrap").appendTo($("#my_video_1"));
+  var player = currPlayer;
+
+  //console.log("Start");
+  //console.log(player);
+  player.pause();
+  player.src(url);
+  player.load();
+
+  player.play();
+
+  player.on("ended", function() {
+    // Play the endPlayer
+    //console.dir("Done");
+    // player.pause();
+    // var oldPlayer = document.getElementById("my_video_1");
+    // videojs(oldPlayer).dispose();
+
+    // player.src(url);
+    // player.load();
+    // player.play();
+    var sss = setTimeout(function() {
+      nextVid();
+      clearTimeout(sss);
+    }, 2000);
+
+    // var oldPlayer = document.getElementById("my_video_1");
+    // videojs(oldPlayer).dispose();
+  });
 }
