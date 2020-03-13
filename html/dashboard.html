@@ -10,6 +10,13 @@
     <meta name="keywords" content="">
     <meta name="author" content="DevsNotWizard">
     <title>Dashboard</title>
+
+    <!-- Firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -111,9 +118,10 @@
 
                             <li class="dropdown dropdown-user nav-item"><a
                                     class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John
-                                            Doe</span><span class="user-status">Available</span></div><span><img
-                                            class="round" src="../app-assets/images/portrait/small/avatar-s-11.png"
+                                    <div class="user-nav d-sm-flex d-none"><span id="user-name"
+                                            class="user-name text-bold-600"></span><span id="user-mail"
+                                            class="user-status"></span></div><span><img class="round"
+                                            src="https://cdn2.iconfinder.com/data/icons/avatar-profile/449/avatar_user_default_cardigan_contact_profile-512.png"
                                             alt="avatar" height="40" width="40" /></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
@@ -121,8 +129,8 @@
                                         Profile</a><a class="dropdown-item" href="app-email.html"><i
                                             class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item"
                                         href="app-todo.html"><i class="feather icon-check-square"></i> Task</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item"
-                                        href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" onclick="logout()"><i
+                                            class="feather icon-power"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -137,7 +145,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Recent Campaigns</h2>
+                        <h2 class="content-header-title float-left mb-0">Your Campaigns</h2>
                     </div>
                 </div>
             </div>
@@ -181,45 +189,9 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
     <!--Dynamic Quick View-->
-    <script>
+    <script src="../assets/js/dashboard.js">
 
-        $(document).ready(function () {
 
-            $('#createCampaign').click(function () {
-                window.location.href = './createCampaign.html';
-            });
-
-            $('#viewCampaign').click(function () {
-                window.location.href = './underConstruction.html';
-            });
-        });
-
-        $(document).ready(function () {
-            $.getJSON('https://propoback.herokuapp.com/getAd', function (data) {
-                console.log(data);
-                var arr = []
-                Object.keys(data).forEach(function (key) {
-                    arr.push(data[key])
-                })
-
-                var i = 1;
-
-                arr.map(function (d) {
-                    $("#quick-card").append(`
-                    <div class="col-sm-4">
-                        <div class="card border-primary mb-3"">
-                            <div class="card-body">
-                                <h5 class="card-header mb-2"><b>${d.name}</b></h5>
-                                <iframe width="280" height="240" src= ${d.src} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <p class="card-text"><b>Video URL: </b>${d.src}</p>
-                                <p class="card-text"><b>Category: </b>${d.category}</p>
-                                <p class="card-text"><b>Gender: </b>${d.gender}</p>
-                            </div>
-                        </div>
-                    </div>`)
-                })
-            })
-        });
     </script>
 
 

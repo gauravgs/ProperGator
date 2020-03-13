@@ -10,6 +10,13 @@
     <meta name="keywords" content="">
     <meta name="author" content="DevsNotWizard">
     <title>Create Campaign</title>
+
+    <!-- Firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+    <script src="../assets/js/auth.js"></script>
+
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
@@ -111,9 +118,10 @@
 
                             <li class="dropdown dropdown-user nav-item"><a
                                     class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                    <div class="user-nav d-sm-flex d-none"><span class="user-name text-bold-600">John
-                                            Doe</span><span class="user-status">Available</span></div><span><img
-                                            class="round" src="../app-assets/images/portrait/small/avatar-s-11.png"
+                                    <div class="user-nav d-sm-flex d-none"><span id="user-name"
+                                            class="user-name text-bold-600"></span><span id="user-mail"
+                                            class="user-status"></span></div><span><img class="round"
+                                            src="https://cdn2.iconfinder.com/data/icons/avatar-profile/449/avatar_user_default_cardigan_contact_profile-512.png"
                                             alt="avatar" height="40" width="40" /></span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item"
@@ -121,8 +129,8 @@
                                         Profile</a><a class="dropdown-item" href="app-email.html"><i
                                             class="feather icon-mail"></i> My Inbox</a><a class="dropdown-item"
                                         href="app-todo.html"><i class="feather icon-check-square"></i> Task</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item"
-                                        href="auth-login.html"><i class="feather icon-power"></i> Logout</a>
+                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="login.html"><i
+                                            class="feather icon-power"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -263,36 +271,7 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
     <!--Dynamic Quick View-->
-    <script>
-        $('#createCampaign').click(function () {
-            window.location.href = '#';
-        });
-
-        $('#viewCampaign').click(function () {
-            window.location.href = './underConstruction.html';
-        });
-
-        $('#viewAllCampaign').click(function () {
-            window.location.href = './underConstruction.html';
-        });
-
-        function createCampign() {
-            let name = document.getElementById('name').value;
-            let vurl = document.getElementById('vurl').value;
-            let category = document.getElementById('category').value;
-            let gender = document.getElementById('gender').value;
-            if (name !== '' && category !== '' && vurl !== '' && gender !== '') {
-                $.getJSON('https://propoback.herokuapp.com/addNewAd?src=' + vurl + '&category=' + category + '&name=' + name + '&gender=' + gender, function (f) { console.log("A") });
-                alert("Campaign Created!");
-            } else {
-                alert("Please fill all details");
-            }
-            document.getElementById('name').value = '';
-            document.getElementById('vurl').value = '';
-            document.getElementById('category').value = '';
-            document.getElementById('gender').value = '';
-        }; 
-    </script>
+    <script src="../assets/js/createCampaign.js"></script>
 
 
     <!-- BEGIN: Vendor JS-->
