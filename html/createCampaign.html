@@ -156,13 +156,7 @@
                     <!-- Paste your content divs here    ****************************  -->
 
                     <section id="basic-examples">
-                        <div class="row match-height" id="quick-tender">
-
-
-                        </div>
-                        <br />
                         <div class="row align-items-center justify-content-center">
-
                             <div id="createCampaign">
                                 <div class="col-md-12 col-12">
                                     <div class="card">
@@ -173,7 +167,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Campaign Name</span>
+                                                                    <span>Name*</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <input type="text" id="name" class="form-control"
@@ -184,30 +178,56 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Video URL</span>
+                                                                    <span>Campaign Thumbnail*</span>
                                                                 </div>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" id="vurl" class="form-control"
-                                                                        name="vurl" placeholder="Video URL">
+                                                                    <input type="text" id="thumbnail" class="form-control"
+                                                                        placeholder="Thumbnail URL">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Age Category</span>
+                                                                    <span>Type*</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <select class="custom-select form-control"
-                                                                        id="category" name="location">
-                                                                        <option value="">--Select Age--</option>
-                                                                        <option value="1">Childern ( below 15 years)
+                                                                        id="campaignType" name="campaign-type">
+                                                                        <option value="">--Select Campaign Type--</option>
+                                                                        <option value="video">Video</option>
+                                                                        <option value="image">Image</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Source*</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="src" class="form-control"
+                                                                        name="Source" placeholder="Campign Source">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Age Category*</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <select class="custom-select form-control"
+                                                                        id="ageCategory" name="Age Category">
+                                                                        <option value="">--Select Age Category--</option>
+                                                                        <option value="1">1. Childern ( below 15 years)
                                                                         </option>
-                                                                        <option value="2">Youngsters ( 15 to 27
+                                                                        <option value="2">2. Youngsters ( 15 to 27
                                                                             years)</option>
-                                                                        <option value="3">Adult (27 to 50 years)
+                                                                        <option value="3">3. Adult (27 to 50 years)
                                                                         </option>
-                                                                        <option value="4">Old Age (above 50 years)
+                                                                        <option value="4">4. Old Age (above 50 years)
                                                                         </option>
                                                                     </select>
                                                                 </div>
@@ -216,7 +236,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Gender</span>
+                                                                    <span>Gender*</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <select class="custom-select form-control"
@@ -229,8 +249,33 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Website</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="website" class="form-control"
+                                                                        name="Website" placeholder="Website">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Product Link</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="productLink" class="form-control"
+                                                                        name="Product Link" placeholder="Product Link">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="offset-md-11">
+                                                            <p style="color: red;">* Required</p>
+                                                        </div>
                                                         <div class="col-md-8 offset-md-4">
-                                                            <button onclick="createCampign()"
+                                                            <button type="submit" onclick="createCampaign()"
                                                                 class="btn btn-primary mr-1 mb-1">Create</button>
                                                         </div>
                                                     </div>
