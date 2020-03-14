@@ -11,15 +11,26 @@ $(document).ready(function () {
         Object.keys(data).forEach(function (key) {
             arr.push(data[key])
         });
+        var ageGroup = "";
         arr.map(function (d) {
+            if (d.category == 1) {
+                ageGroup = "below 15 years";
+            } else if (d.category == 2) {
+                ageGroup = "15 to 27 years";
+            } else if (d.category == 3) {
+                ageGroup = "27 to 50 years"
+            } else {
+                ageGroup = "above 50 years";
+            }
             $("#quick-card").append(`
             <div class="col-sm-4">
                 <div class="card border-primary mb-3"">
                     <div class="card-body">
                         <h5 class="card-header mb-2"><b>${d.name}</b></h5>
                         <img width="280" height="200" src= ${d.thumbnail}></img>
-                        <p class="card-text"><b>Campaign URL: </b><a href="${d.src}" target="_blank">${d.src}</a></p>
-                        <p class="card-text"><b>Category: </b>${d.category}</p>
+                        <br><br>
+                        <p class="card-text"><b>Campaign Source: </b><a href="${d.src}" target="_blank">Click here</a></p>
+                        <p class="card-text"><b>Age Group: </b>${ageGroup}</p>
                         <p class="card-text"><b>Gender: </b>${d.gender}</p>
                     </div>
                 </div>

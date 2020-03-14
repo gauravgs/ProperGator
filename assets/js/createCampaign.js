@@ -41,6 +41,7 @@ function createCampaign() {
     }
 
     document.getElementById('name').value = '';
+    document.getElementById('thumbnail').value = '';
     document.getElementById('campaignType').value = '';
     document.getElementById('src').value = '';
     document.getElementById('ageCategory').value = '';
