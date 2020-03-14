@@ -68,29 +68,6 @@ video.addEventListener("play", () => {
       console.log(age);
       // $("#myvid").html(`<h1>${age}</h1>`);
       window.localStorage.setItem("hello", age);
-<<<<<<< HEAD
-=======
-      
-      document.getElementById("age").innerHTML = age;
-      if (age < 15) {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=1";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=1");
-      } else if (age < 27) {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=2";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=2");
-      } else if (age < 50) {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=3";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=3");
-      } else {
-        // myvid = document.getElementById("vid");
-        // myvid.src = "http://localhost:3001/video?age=4";
-        // $("#myvid").attr("src", "http://localhost:3001/video?age=4");
-      }
-
->>>>>>> b786ec28d1bdf10c8ed2c62a3985dc437b0ed9e9
       drawBox.draw(canvas);
     });
     // console.log("TOTAL ==>>\t" + k);
@@ -111,7 +88,9 @@ video.addEventListener("play", () => {
   }, 1000);
 });
 
-var nextAD = ["default"];
+var nextAD = [
+  "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4"
+];
 var happy = 0;
 var sad = 0;
 var angry = 0;
@@ -172,6 +151,40 @@ var old = 0,
   superold = 0;
 
 function nextVid() {
+  var str = ` <video
+        id="my_video_1"
+        class="video-js vjs-default-skin  video vjs-16-9"
+        controls
+        preload="auto"
+        width="640"
+        height="360"
+        data-setup="{ }"
+        style="z-index: 1; position:absolute; top: 0%; left: 0%;"
+        muted
+      ></video><div id="overlays-wrap">
+      <p
+        class="vo-question"
+        id="age"
+        style="position:fixed;
+            bottom:60px;
+            right:20px;
+            opacity:0.5;
+            z-index:99;"
+      >
+        AGE
+      </p>
+
+      <img
+        src="./logowhite.png"
+        alt=""
+        style="position:fixed;
+            bottom:5px;
+            right:7px;
+            opacity:0.5;
+            z-index:99;"
+      />
+    </div>`;
+  $("#ad").html(str);
   playNext = nextAD.pop();
   // nextAD = [
   //   "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4",
@@ -186,28 +199,42 @@ function nextVid() {
 function updateAD(age) {
   if (age < 16) {
     yng++;
-    console.log("yng");
-    document.getElementById("age").innerHTML = "Children";
+    console.log("children");
+
+    var ageid = document.getElementById("age");
+    if (ageid) {
+      ageid.innerHTML = "Children";
+    }
+
     nextAD.push(
       "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4"
     );
   } else if (age < 30) {
     mid++;
-    console.log("mid");
-    document.getElementById("age").innerHTML = "Young";
+    console.log("Young");
+    var ageid = document.getElementById("age");
+    if (ageid) {
+      ageid.innerHTML = "Young";
+    }
     nextAD.push(
       "https://res.cloudinary.com/dztcftsli/video/upload/v1583983652/Inspiration_-_2016_Harley-Davidson_Motorcycles_twr67d.mp4"
     );
   } else if (age < 50) {
-    document.getElementById("age").innerHTML = "Mid";
+    var ageid = document.getElementById("age");
+    if (ageid) {
+      ageid.innerHTML = "Mid";
+    }
     old++;
-    console.log("old");
+    console.log("Mid");
     nextAD.push(
       "https://res.cloudinary.com/dztcftsli/video/upload/v1583984276/pay_r6smoi.mp4"
     );
   } else {
-    console.log("super");
-    document.getElementById("age").innerHTML = "Old";
+    console.log("Old");
+    var ageid = document.getElementById("age");
+    if (ageid) {
+      ageid.innerHTML = "Old";
+    }
     superold++;
     nextAD.push(
       "https://res.cloudinary.com/dztcftsli/video/upload/v1583984281/travel_osq8yi.mp4"
@@ -241,9 +268,10 @@ function pushStats() {
   };
 }
 $(document).ready(function() {
-  playVideo(
-    "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4"
-  );
+  // playVideo(
+  //   "https://res.cloudinary.com/dztcftsli/video/upload/v1583983167/Cadbury_Dairy_Milk_-_Aliens_-_Canada_40_secs_o2ewgp.mp4"
+  // );
+  nextVid();
 });
 var currPlayer = videojs("my_video_1");
 function playVideo(url) {
@@ -252,7 +280,7 @@ function playVideo(url) {
   var currPlayer = videojs("my_video_1");
   $("#overlays-wrap").appendTo($("#my_video_1"));
   var player = currPlayer;
-
+  // $("#ad").fadeIn();
   //console.log("Start");
   //console.log(player);
   player.pause();
@@ -264,17 +292,17 @@ function playVideo(url) {
   player.on("ended", function() {
     // Play the endPlayer
     //console.dir("Done");
-    // player.pause();
-    // var oldPlayer = document.getElementById("my_video_1");
-    // videojs(oldPlayer).dispose();
+    player.pause();
+    // $("#ad").fadeOut();
+    var oldPlayer = document.getElementById("my_video_1");
+    videojs(oldPlayer).dispose();
 
     // player.src(url);
     // player.load();
     // player.play();
-    var sss = setTimeout(function() {
-      nextVid();
-      clearTimeout(sss);
-    }, 2000);
+    $("#overlays-wrap").appendTo($("#ad"));
+
+    nextVid();
 
     // var oldPlayer = document.getElementById("my_video_1");
     // videojs(oldPlayer).dispose();
