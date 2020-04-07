@@ -63,10 +63,10 @@ video.addEventListener("play", () => {
 
       age = Math.round(detection.age);
       detected.push(age);
-      console.log(detection);
+      // console.log(detection);
       exp = detection.expressions;
       var myvid;
-      console.log(age);
+      //  console.log(age);
       // $("#myvid").html(`<h1>${age}</h1>`);
       window.localStorage.setItem("hello", age);
       drawBox.draw(canvas);
@@ -92,16 +92,16 @@ video.addEventListener("play", () => {
 //////////// facenet end
 function findages() {
   console.log(
-    "yng " + yng + " mid " + mid,
-    " old " + old + " super old " + superold + "at find ages"
+    "Children " + yng + " Young " + mid,
+    " Mid " + old + " Old " + superold + "at find ages"
   );
   console.log(detected, "detected aages");
-  for (var a in detected) {
-    if (0 < age && age < 16) {
+  for (var a = 0; a < detected.length; a++) {
+    if (0 < detected[a] && detected[a] < 16) {
       yng++;
-    } else if (0 < age && age < 30) {
+    } else if (0 < detected[a] && detected[a] < 30) {
       mid++;
-    } else if (0 < age && age < 50) {
+    } else if (0 < detected[a] && detected[a] < 50) {
       old++;
     } else {
       superold++;
@@ -138,7 +138,7 @@ var fear = 0;
 var disg = 0;
 function loadData() {
   $.getJSON(`https://propogator-2cc09.firebaseio.com/.json`, function (d) {
-    console.log(d);
+    // console.log(d);
     data = d;
     dataReady = true;
 
@@ -162,15 +162,15 @@ function loadData() {
   });
 
   console.log("Data Sync");
-  console.log(list);
-  console.log(listcat1);
-  console.log(listcat2);
-  console.log(listcat3);
-  console.log(listcat4);
+  // console.log(list);
+  // console.log(listcat1);
+  // console.log(listcat2);
+  // console.log(listcat3);
+  // console.log(listcat4);
 }
 function syncData() {
   $.getJSON(`https://propogator-2cc09.firebaseio.com/.json`, function (d) {
-    console.log(d);
+    // console.log(d);
     data = d;
     dataReady = true;
 
@@ -192,11 +192,11 @@ function syncData() {
   });
 
   console.log("Data Sync");
-  console.log(list);
-  console.log(listcat1);
-  console.log(listcat2);
-  console.log(listcat3);
-  console.log(listcat4);
+  //   console.log(list);
+  //   console.log(listcat1);
+  //   console.log(listcat2);
+  //   console.log(listcat3);
+  //   console.log(listcat4);
 }
 
 setInterval(function () {
@@ -214,6 +214,7 @@ setInterval(function () {
 // max -> max ppl spotted together
 
 function initAll() {
+  console.log("in initALl");
   happy = 0;
   sad = 0;
   angry = 0;
@@ -222,7 +223,8 @@ function initAll() {
   disg = 0;
   yng = 0;
   mid = 0;
-
+  old = 0;
+  superold = 0;
   nextAD = [];
 }
 var flag = 0;
@@ -271,6 +273,8 @@ async function nextVid() {
   console.log("in next vid");
   console.log(nextAD);
   var toshowad = nextAD.pop();
+  pushStats();
+  initAll();
   console.log("showingthis");
   console.log(toshowad);
   // blur to loader
@@ -442,15 +446,9 @@ async function nextVid() {
     playVideo(toshowad.src);
     console.log(toshowad.src);
   }
-  pushStats();
-  initAll();
 }
 
 function updateAD(age) {
-  console.log(
-    "yng " + yng + " mid " + mid,
-    " old " + old + " super old " + superold + "update ADD"
-  );
   if (age > 0) {
     if (age < 16) {
       console.log("children");
@@ -492,19 +490,19 @@ function updateNextAD(age) {
     "yng " + yng + " mid " + mid,
     " old " + old + " super old " + superold
   );
-  if (yng > mid && yng > old && yng > superold) {
+  if (yng >= mid && yng > old && yng > superold) {
     console.log(" Playing for children");
 
     var adnode = listcat1.pop();
     listcat1.unshift(adnode);
     nextAD.push(adnode);
-  } else if (mid > yng && mid > old && mid > superold) {
+  } else if (mid > yng && mid >= old && mid > superold) {
     console.log(" Playing for Young");
 
     var adnode = listcat2.pop();
     listcat2.unshift(adnode);
     nextAD.push(adnode);
-  } else if (old > yng && old > mid && old > superold) {
+  } else if (old > yng && old > mid && old >= superold) {
     console.log(" Playing for  Mid");
     var adnode = listcat3.pop();
     listcat3.unshift(adnode);
