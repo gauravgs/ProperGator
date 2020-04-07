@@ -214,7 +214,7 @@ setInterval(function () {
 // max -> max ppl spotted together
 
 function initAll() {
-  console.log("in initALl");
+  // console.log("in initALl");
   happy = 0;
   sad = 0;
   angry = 0;
@@ -265,13 +265,13 @@ var old = 0,
 
 async function nextVid() {
   updateNextAD(age);
-  console.log(listcat1);
-  console.log(listcat2);
-  console.log(listcat3);
-  console.log(listcat4);
+  // console.log(listcat1);
+  // console.log(listcat2);
+  // console.log(listcat3);
+  // console.log(listcat4);
   animation.show();
   console.log("in next vid");
-  console.log(nextAD);
+  // console.log(nextAD);
   var toshowad = nextAD.pop();
   pushStats();
   initAll();
@@ -478,7 +478,7 @@ function updateAD(age) {
       }
     }
   } else {
-    console.log("no age");
+    console.log("no Detection");
     var ageid = document.getElementById("age");
     if (ageid) {
       ageid.innerHTML = "---";
@@ -486,10 +486,6 @@ function updateAD(age) {
   }
 }
 function updateNextAD(age) {
-  console.log(
-    "yng " + yng + " mid " + mid,
-    " old " + old + " super old " + superold
-  );
   if (yng >= mid && yng > old && yng > superold) {
     console.log(" Playing for children");
 
@@ -547,7 +543,7 @@ $(document).ready(function () {
 
 var nowAdplaying = false;
 function playVideo(url) {
-  console.log("in vid", url);
+  // console.log("in vid", url);
   nowAdplaying = true;
   var currPlayer = videojs("my_video_1");
   $("#overlays-wrap").appendTo($("#my_video_1"));
