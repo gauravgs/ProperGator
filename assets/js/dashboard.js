@@ -4,14 +4,14 @@ let userMail = document.getElementById("user-mail");
 userMail.textContent = localStorage.getItem("user-mail");
 userName.textContent = localStorage.getItem("user-name");
 
-$(document).ready(function() {
-  $.getJSON("https://propoback.herokuapp.com/getAd", function(data) {
+$(document).ready(function () {
+  $.getJSON("https://propoback.herokuapp.com/getAd", function (data) {
     var arr = [];
-    Object.keys(data).forEach(function(key) {
+    Object.keys(data).forEach(function (key) {
       arr.push(data[key]);
     });
     var ageGroup = "";
-    arr.map(function(d) {
+    arr.map(function (d) {
       if (d.category == 1) {
         ageGroup = "below 16 years";
       } else if (d.category == 2) {
@@ -26,7 +26,7 @@ $(document).ready(function() {
                 <div class="card border-primary mb-3"">
                     <div class="card-body">
                         <h5 class="card-header mb-2"><b>${d.name}</b></h5>
-                        <img width="280" height="200" src= ${d.thumbnail}></img>
+                        <img width="280" height="200"  style="margin-left: 25px;" src= ${d.thumbnail}></img>
                         <br><br>
                         <p class="card-text"><b>Campaign Source: </b><a href="${d.src}" target="_blank">Click here</a></p>
                         <p class="card-text"><b>Age Group: </b>${ageGroup}</p>
@@ -38,7 +38,7 @@ $(document).ready(function() {
   });
 });
 
-auth.onAuthStateChanged(user => {
+auth.onAuthStateChanged((user) => {
   if (user) {
     //User is signed in
   } else {
@@ -46,10 +46,10 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-$("#createCampaign").click(function() {
+$("#createCampaign").click(function () {
   window.location.href = "./createCampaign.html";
 });
 
-$("#viewCampaign").click(function() {
+$("#viewCampaign").click(function () {
   window.location.href = "./underConstruction.html";
 });
