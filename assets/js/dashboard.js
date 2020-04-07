@@ -25,7 +25,7 @@ $(document).ready(function () {
         <div class="col-sm-4">
           <div class="card border-primary mb-3"">
             <div class="card-body">
-              <h5 class="card-header mb-2"><b>${d.name}</b></h5>
+              <h5 class="card-header mb-2"><a href="javascript: campaignBoard('${d.uid}')"><b style="color: black">${d.name}</b></a></h5>
               <center>
                 <img width="280" height="200" src= ${d.thumbnail}></img>
               </center>
