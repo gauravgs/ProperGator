@@ -103,7 +103,6 @@ var animation = bodymovin.loadAnimation({
 animation.play();
 
 animation.hide();
-animation.show();
 
 ////////  display code
 list = [];
@@ -201,15 +200,16 @@ var old = 0,
   mid = 0,
   superold = 0;
 
-function nextVid() {
+async function nextVid() {
+  animation.show();
+  console.log("in next vid");
   console.log(nextAD);
-  var toshowad = nextAD[0];
+  var toshowad = nextAD.pop();
   console.log("showingthis");
   console.log(toshowad);
-
-  if (nextAD[0].mediaType == "image") {
-    var imgcode = ` <img
-        src="https://picsum.photos/500"
+  // blur to loader
+  var blur = ` <img
+        src="./blur.jpg"
         style="
           z-index: 99;
           position: absolute;
@@ -247,7 +247,71 @@ function nextVid() {
           z-index: 99;
         "
       />
-    </div>`;
+     
+     </div>`;
+  $("#ad").html(blur);
+  await sleep(4000);
+  animation.hide();
+  if (toshowad.mediaType == "image") {
+    var imgcode = ` <img
+        src="${toshowad.src}"
+        style="
+          z-index: 99;
+          position: absolute;
+          top: 0%;
+          left: 0%;
+          width: 100%;
+          height: 100%;
+        "
+        alt=""
+      />
+    </div>
+    <div id="overlays-wrap">
+      <p
+        class="vo-question"
+        id="age"
+        style="
+          position: fixed;
+          bottom: 60px;
+          right: 20px;
+          opacity: 0.5;
+          z-index: 99;
+        "
+      >
+        AGE
+      </p>
+
+      <img
+        src="./logowhite.png"
+        alt=""
+        style="
+          position: fixed;
+          bottom: 5px;
+          right: 7px;
+          opacity: 0.5;
+          z-index: 99;
+        "
+      />
+      <h6 style="position:fixed;
+            bottom:110px;
+            left:27px;
+            opacity:0.5;
+            z-index:99;"> Scan Me</h6>
+    <img
+      id="barcode"
+      src="https://api.qrserver.com/v1/create-qr-code/?data=${toshowad.uid}&amp;size=100x100"
+      alt=""
+      title="1111jjjjjjjjj"
+      width="100"
+      height="100"
+      style="position:fixed;
+            bottom:10px;
+            left:10px;
+            opacity:0.5;
+            z-index:99;"
+    />
+     </div>`;
+    $("#ad").html(imgcode);
     var sss = setTimeout(function () {
       nextVid();
       clearTimeout(sss);
@@ -275,7 +339,12 @@ function nextVid() {
       >
         AGE
       </p>
-
+ <h6 style="position:fixed;
+            bottom:110px;
+            left:27px;
+            opacity:0.5;
+            z-index:99;"> Scan Me</h6>
+    <img
       <img
         src="./logowhite.png"
         alt=""
@@ -285,12 +354,27 @@ function nextVid() {
             opacity:0.5;
             z-index:99;"
       />
-    </div>`;
+   
+     <img
+      id="barcode"
+      src="https://api.qrserver.com/v1/create-qr-code/?data=${toshowad.uid}&amp;size=100x100"
+      alt=""
+      title="1111jjjjjjjjj"
+      width="100"
+      height="100"
+      style="position:fixed;
+            bottom:10px;
+            left:10px;
+            opacity:0.5;
+            z-index:99;"
+    />
+     </div>
+    
+    `;
     $("#ad").html(str);
-    playNext = nextAD.pop();
 
-    playVideo(playNext.src);
-    console.log(playNext.src);
+    playVideo(toshowad.src);
+    console.log(toshowad.src);
   }
   pushStats();
   initAll();
@@ -306,7 +390,7 @@ function updateAD(age) {
       ageid.innerHTML = "Children";
     }
     var adnode = listcat1.pop();
-    listcat1.push(adnode);
+    listcat1.unshift(adnode);
     nextAD.push(adnode);
   } else if (age < 30) {
     mid++;
@@ -316,7 +400,7 @@ function updateAD(age) {
       ageid.innerHTML = "Young";
     }
     var adnode = listcat2.pop();
-    listcat2.push(adnode);
+    listcat2.unshift(adnode);
     nextAD.push(adnode);
   } else if (age < 50) {
     var ageid = document.getElementById("age");
@@ -326,7 +410,7 @@ function updateAD(age) {
     old++;
     console.log("Mid");
     var adnode = listcat3.pop();
-    listcat3.push(adnode);
+    listcat3.unshift(adnode);
     nextAD.push(adnode);
   } else {
     console.log("Old");
@@ -336,7 +420,7 @@ function updateAD(age) {
     }
     superold++;
     var adnode = listcat4.pop();
-    listcat4.push(adnode);
+    listcat4.unshift(adnode);
     nextAD.push(adnode);
   }
 }
@@ -403,4 +487,7 @@ function playVideo(url) {
     // var oldPlayer = document.getElementById("my_video_1");
     // videojs(oldPlayer).dispose();
   });
+}
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
