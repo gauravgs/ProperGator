@@ -149,7 +149,47 @@ function loadData() {
   console.log(listcat3);
   console.log(listcat4);
 }
+function syncData() {
+  $.getJSON(`https://propogator-2cc09.firebaseio.com/.json`, function (d) {
+    console.log(d);
+    data = d;
+    dataReady = true;
 
+    if (d.hasOwnProperty("Ad")) {
+      var data = d.Ad;
+      for (var key of Object.keys(data)) {
+        list.push(data[key]);
+        if (data[key].category == 1) {
+          listcat1.push(data[key]);
+        } else if (data[key].category == 2) {
+          listcat2.push(data[key]);
+        } else if (data[key].category == 3) {
+          listcat3.push(data[key]);
+        } else {
+          listcat4.push(data[key]);
+        }
+      }
+    }
+  });
+
+  console.log("Data Sync");
+  console.log(list);
+  console.log(listcat1);
+  console.log(listcat2);
+  console.log(listcat3);
+  console.log(listcat4);
+}
+
+setInterval(function () {
+  if (nowAdplaying) {
+    list = [];
+    listcat1 = [];
+    listcat2 = [];
+    listcat3 = [];
+    listcat4 = [];
+    syncData();
+  }
+}, 65000);
 // k-> no. of faces detected
 // total -> total faces identified
 // max -> max ppl spotted together
@@ -454,9 +494,10 @@ $(document).ready(function () {
   loadData();
 });
 
+var nowAdplaying = false;
 function playVideo(url) {
   console.log("in vid", url);
-
+  nowAdplaying = true;
   var currPlayer = videojs("my_video_1");
   $("#overlays-wrap").appendTo($("#my_video_1"));
   var player = currPlayer;
@@ -472,6 +513,7 @@ function playVideo(url) {
   player.on("ended", function () {
     // Play the endPlayer
     //console.dir("Done");
+    nowAdplaying = false;
     player.pause();
     // $("#ad").fadeOut();
     var oldPlayer = document.getElementById("my_video_1");
