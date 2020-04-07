@@ -35,7 +35,7 @@ var age = 10;
 var exp;
 var ongoing = true;
 var popAge = 0;
-
+var detected = [];
 video.addEventListener("play", () => {
   const canvas = faceapi.createCanvasFromMedia(video);
   document.body.append(canvas);
@@ -43,7 +43,7 @@ video.addEventListener("play", () => {
   faceapi.matchDimensions(canvas, displaySize);
   setInterval(async () => {
     k = 0;
-
+    age = 0;
     const detections = await faceapi
       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
@@ -60,9 +60,10 @@ video.addEventListener("play", () => {
       const drawBox = new faceapi.draw.DrawBox(box, {
         label: Math.round(detection.age) + " year old " + detection.gender,
       });
-      age = Math.round(detection.age);
 
-      // console.log(detection.expressions);
+      age = Math.round(detection.age);
+      detected.push(age);
+      console.log(detection);
       exp = detection.expressions;
       var myvid;
       console.log(age);
@@ -71,7 +72,7 @@ video.addEventListener("play", () => {
       drawBox.draw(canvas);
     });
     // console.log("TOTAL ==>>\t" + k);
-
+    findages();
     // ========================================================================================================
 
     //TODO
@@ -85,11 +86,29 @@ video.addEventListener("play", () => {
     // updateAD(age);
 
     // initAll();
-  }, 1000);
+  }, 2500);
 });
 
 //////////// facenet end
-
+function findages() {
+  console.log(
+    "yng " + yng + " mid " + mid,
+    " old " + old + " super old " + superold + "at find ages"
+  );
+  console.log(detected, "detected aages");
+  for (var a in detected) {
+    if (0 < age && age < 16) {
+      yng++;
+    } else if (0 < age && age < 30) {
+      mid++;
+    } else if (0 < age && age < 50) {
+      old++;
+    } else {
+      superold++;
+    }
+  }
+  detected = [];
+}
 // loader
 
 var animation = bodymovin.loadAnimation({
@@ -201,6 +220,8 @@ function initAll() {
   surp = 0;
   fear = 0;
   disg = 0;
+  yng = 0;
+  mid = 0;
 
   nextAD = [];
 }
@@ -352,7 +373,7 @@ async function nextVid() {
       style="position:fixed;
             bottom:10px;
             left:10px;
-            opacity:0.5;
+            opacity:0.7;
             z-index:99;"
     />
      </div>`;
@@ -410,7 +431,7 @@ async function nextVid() {
       style="position:fixed;
             bottom:10px;
             left:10px;
-            opacity:0.5;
+            opacity:0.7;
             z-index:99;"
     />
      </div>
@@ -426,51 +447,64 @@ async function nextVid() {
 }
 
 function updateAD(age) {
-  if (age < 16) {
-    yng++;
-    console.log("children");
+  console.log(
+    "yng " + yng + " mid " + mid,
+    " old " + old + " super old " + superold + "update ADD"
+  );
+  if (age > 0) {
+    if (age < 16) {
+      console.log("children");
 
-    var ageid = document.getElementById("age");
-    if (ageid) {
-      ageid.innerHTML = "Children";
+      var ageid = document.getElementById("age");
+      if (ageid) {
+        ageid.innerHTML = "Children";
+      }
+    } else if (age < 30) {
+      console.log("Young");
+      var ageid = document.getElementById("age");
+      if (ageid) {
+        ageid.innerHTML = "Young";
+      }
+    } else if (age < 50) {
+      var ageid = document.getElementById("age");
+      if (ageid) {
+        ageid.innerHTML = "Mid";
+      }
+
+      console.log("Mid");
+    } else {
+      console.log("Old");
+      var ageid = document.getElementById("age");
+      if (ageid) {
+        ageid.innerHTML = "Old";
+      }
     }
-  } else if (age < 30) {
-    mid++;
-    console.log("Young");
-    var ageid = document.getElementById("age");
-    if (ageid) {
-      ageid.innerHTML = "Young";
-    }
-  } else if (age < 50) {
-    var ageid = document.getElementById("age");
-    if (ageid) {
-      ageid.innerHTML = "Mid";
-    }
-    old++;
-    console.log("Mid");
   } else {
-    console.log("Old");
+    console.log("no age");
     var ageid = document.getElementById("age");
     if (ageid) {
-      ageid.innerHTML = "Old";
+      ageid.innerHTML = "---";
     }
-    superold++;
   }
 }
 function updateNextAD(age) {
-  if (age < 16) {
+  console.log(
+    "yng " + yng + " mid " + mid,
+    " old " + old + " super old " + superold
+  );
+  if (yng > mid && yng > old && yng > superold) {
     console.log(" Playing for children");
 
     var adnode = listcat1.pop();
     listcat1.unshift(adnode);
     nextAD.push(adnode);
-  } else if (age < 30) {
+  } else if (mid > yng && mid > old && mid > superold) {
     console.log(" Playing for Young");
 
     var adnode = listcat2.pop();
     listcat2.unshift(adnode);
     nextAD.push(adnode);
-  } else if (age < 50) {
+  } else if (old > yng && old > mid && old > superold) {
     console.log(" Playing for  Mid");
     var adnode = listcat3.pop();
     listcat3.unshift(adnode);
