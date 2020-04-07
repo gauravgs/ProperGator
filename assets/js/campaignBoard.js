@@ -8,7 +8,7 @@ auth.onAuthStateChanged(user => {
     if (user) {
         //User is signed in
     } else {
-        window.location.href = "./login.html";
+        window.location.href = "./index.html";
     }
 });
 
@@ -39,6 +39,44 @@ $(document).ready(function () {
             }
         });
     });
+    //let uid = localStorage.getItem('campaignBoardUID');
+    let uid = "-M4JPFA4J5vQFOgD6jGw";
+    database.ref().child("Ad").child(uid).child("Analytics").on('value', function (d) {
+        let data = d.val();
+        var arr = [];
+        Object.keys(data).forEach(function (key) {
+            arr.push(data[key]);
+        });
+        let cat1 = 0;
+        let cat2 = 0;
+        let cat3 = 0;
+        let cat4 = 0;
+        let males = 0;
+        let females = 0;
+        let others = 0;
+        arr.map(function (d) {
+            switch (d.gender) {
+                case "male": males++;
+                    break;
+                case "female": females++;
+                    break;
+                case "other": others++;
+            }
+            if (d.age < 16) {
+                cat1++;
+            } else if (d.age >= 16 && d.age < 30) {
+                cat2++;
+            } else if (d.age >= 30 && d.age < 50) {
+                cat3++;
+            } else {
+                cat4++;
+            }
+        });
+        let views = { cat1: cat1, cat2: cat2, cat3: cat3, cat4: cat4 };
+        let gender = { males: males, females: females, others: others };
+        createViewsBar(views);
+        createGenderPie(gender);
+    });
 });
 
 function campaignBoard(uid) {
@@ -48,16 +86,14 @@ function campaignBoard(uid) {
 
 function loadUI(data) {
     $("#campaignHeader").text(data.name);
-
-    createGraph();
 }
 
-function createGraph() {
+function createViewsBar(views) {
 
-    let x = ["20 Jan", "24 Jan", "28 Jan", "1 Feb", "5 Feb", "9 Feb", "13 Feb", "17 Feb", "21 Feb", "25 Feb", "29 Feb", "1 Mar", "8 Mar", "12 Mar", "14 Mar"];
-    let y = [278, 916, 6000, 14300, 27400, 39800, 59800, 72400, 75500, 77700, 79300, 80300, 80700, 80900, 81000];
+    let x = ["0-16", "16-30", "30-50", "50-99"];
+    let y = [views.cat1, views.cat2, views.cat3, views.cat4];
 
-    let ctx = document.getElementById('analyticsChart').getContext("2d");
+    let ctx = document.getElementById('viewsBar').getContext("2d");
 
     myChart = new Chart(ctx, {
         type: 'bar',
@@ -67,9 +103,6 @@ function createGraph() {
             datasets: [{
                 borderColor: "#f17e5d",
                 backgroundColor: "#f17e5d",
-                pointRadius: 2,
-                pointHoverRadius: 4,
-                borderWidth: 3,
                 label: "Views",
                 data: y
             }]
@@ -88,10 +121,9 @@ function createGraph() {
                     ticks: {
                         fontColor: "#9f9f9f",
                         beginAtZero: true,
-                        maxTicksLimit: 6,
+                        maxTicksLimit: 6
                     },
                     gridLines: {
-                        drawBorder: false,
                         zeroLineColor: "#ccc",
                         color: 'rgba(0,0,0,0.1)'
                     }
@@ -101,13 +133,33 @@ function createGraph() {
                     gridLines: {
                         drawBorder: false,
                         color: 'rgba(0,0,0,0.1)'
-                    },
-                    ticks: {
-                        padding: 20,
-                        fontColor: "#9f9f9f",
-                        maxTicksLimit: 7
                     }
                 }]
+            },
+        }
+    });
+}
+
+function createGenderPie(gender) {
+    let ctx = document.getElementById('genderPie').getContext("2d");
+
+    myChart = new Chart(ctx, {
+        type: 'pie',
+
+        data: {
+            datasets: [{
+                backgroundColor: ["#429bb8", "#FFB6C1", "#90EE90"],
+                data: [gender.males, gender.females, gender.others]
+            }],
+            labels: ["Males", "Females", "Others"]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+
+            tooltips: {
+                enabled: true
             },
         }
     });

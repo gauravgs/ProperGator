@@ -103,3 +103,8 @@ auth.onAuthStateChanged((user) => {
         window.location.href = "./index.html";
     }
 });
+
+function campaignBoard(uid) {
+    localStorage.setItem('campaignBoardUID', uid);
+    window.location.href = "./campaignBoard.html";
+}
