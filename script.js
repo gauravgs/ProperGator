@@ -133,7 +133,7 @@ function loadData() {
           listcat2.push(data[key]);
         } else if (data[key].category == 3) {
           listcat3.push(data[key]);
-        } else {
+        } else if (data[key].category == 4) {
           listcat4.push(data[key]);
         }
       }
@@ -189,7 +189,7 @@ setInterval(function () {
     listcat4 = [];
     syncData();
   }
-}, 65000);
+}, 600000);
 // k-> no. of faces detected
 // total -> total faces identified
 // max -> max ppl spotted together
@@ -241,6 +241,11 @@ var old = 0,
   superold = 0;
 
 async function nextVid() {
+  updateNextAD(age);
+  console.log(listcat1);
+  console.log(listcat2);
+  console.log(listcat3);
+  console.log(listcat4);
   animation.show();
   console.log("in next vid");
   console.log(nextAD);
@@ -355,7 +360,7 @@ async function nextVid() {
     var sss = setTimeout(function () {
       nextVid();
       clearTimeout(sss);
-    }, 25000);
+    }, 20000);
   } else {
     var str = ` <video
         id="my_video_1"
@@ -366,7 +371,7 @@ async function nextVid() {
         height="360"
         data-setup="{ }"
         style="z-index: 1; position:absolute; top: 0%; left: 0%;"
-        muted
+        
       ></video><div id="overlays-wrap">
       <p
         class="vo-question"
@@ -429,9 +434,6 @@ function updateAD(age) {
     if (ageid) {
       ageid.innerHTML = "Children";
     }
-    var adnode = listcat1.pop();
-    listcat1.unshift(adnode);
-    nextAD.push(adnode);
   } else if (age < 30) {
     mid++;
     console.log("Young");
@@ -439,9 +441,6 @@ function updateAD(age) {
     if (ageid) {
       ageid.innerHTML = "Young";
     }
-    var adnode = listcat2.pop();
-    listcat2.unshift(adnode);
-    nextAD.push(adnode);
   } else if (age < 50) {
     var ageid = document.getElementById("age");
     if (ageid) {
@@ -449,9 +448,6 @@ function updateAD(age) {
     }
     old++;
     console.log("Mid");
-    var adnode = listcat3.pop();
-    listcat3.unshift(adnode);
-    nextAD.push(adnode);
   } else {
     console.log("Old");
     var ageid = document.getElementById("age");
@@ -459,6 +455,29 @@ function updateAD(age) {
       ageid.innerHTML = "Old";
     }
     superold++;
+  }
+}
+function updateNextAD(age) {
+  if (age < 16) {
+    console.log(" Playing for children");
+
+    var adnode = listcat1.pop();
+    listcat1.unshift(adnode);
+    nextAD.push(adnode);
+  } else if (age < 30) {
+    console.log(" Playing for Young");
+
+    var adnode = listcat2.pop();
+    listcat2.unshift(adnode);
+    nextAD.push(adnode);
+  } else if (age < 50) {
+    console.log(" Playing for  Mid");
+    var adnode = listcat3.pop();
+    listcat3.unshift(adnode);
+    nextAD.push(adnode);
+  } else {
+    console.log(" Playing for  Old");
+
     var adnode = listcat4.pop();
     listcat4.unshift(adnode);
     nextAD.push(adnode);
