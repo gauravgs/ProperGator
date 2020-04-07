@@ -1,28 +1,27 @@
-let userName = document.getElementById('user-name');
-let userMail = document.getElementById('user-mail');
+let userName = document.getElementById("user-name");
+let userMail = document.getElementById("user-mail");
 
-userMail.textContent = localStorage.getItem('user-mail');
-userName.textContent = localStorage.getItem('user-name');
+userMail.textContent = localStorage.getItem("user-mail");
+userName.textContent = localStorage.getItem("user-name");
 
-$(document).ready(function () {
-
-    $.getJSON('https://propoback.herokuapp.com/getAd', function (data) {
-        var arr = []
-        Object.keys(data).forEach(function (key) {
-            arr.push(data[key])
-        });
-        var ageGroup = "";
-        arr.map(function (d) {
-            if (d.category == 1) {
-                ageGroup = "below 15 years";
-            } else if (d.category == 2) {
-                ageGroup = "15 to 27 years";
-            } else if (d.category == 3) {
-                ageGroup = "27 to 50 years"
-            } else {
-                ageGroup = "above 50 years";
-            }
-            $("#quick-card").append(`
+$(document).ready(function() {
+  $.getJSON("https://propoback.herokuapp.com/getAd", function(data) {
+    var arr = [];
+    Object.keys(data).forEach(function(key) {
+      arr.push(data[key]);
+    });
+    var ageGroup = "";
+    arr.map(function(d) {
+      if (d.category == 1) {
+        ageGroup = "below 16 years";
+      } else if (d.category == 2) {
+        ageGroup = "16 to 30 years";
+      } else if (d.category == 3) {
+        ageGroup = "30 to 50 years";
+      } else {
+        ageGroup = "above 50 years";
+      }
+      $("#quick-card").append(`
             <div class="col-sm-4">
                 <div class="card border-primary mb-3"">
                     <div class="card-body">
@@ -34,23 +33,23 @@ $(document).ready(function () {
                         <p class="card-text"><b>Gender: </b>${d.gender}</p>
                     </div>
                 </div>
-            </div>`)
-        });
+            </div>`);
     });
+  });
 });
 
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        //User is signed in
-    } else {
-        window.location.href = "./login.html";
-    }
+auth.onAuthStateChanged(user => {
+  if (user) {
+    //User is signed in
+  } else {
+    window.location.href = "./login.html";
+  }
 });
 
-$('#createCampaign').click(function () {
-    window.location.href = './createCampaign.html';
+$("#createCampaign").click(function() {
+  window.location.href = "./createCampaign.html";
 });
 
-$('#viewCampaign').click(function () {
-    window.location.href = './underConstruction.html';
+$("#viewCampaign").click(function() {
+  window.location.href = "./underConstruction.html";
 });
