@@ -77,3 +77,11 @@ function clearForm() {
     document.getElementById('flipkartLink').value = '';
     document.getElementById('description').value = '';
 }
+
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        //User is signed in
+    } else {
+        window.location.href = "./index.html";
+    }
+});

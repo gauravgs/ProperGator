@@ -42,7 +42,7 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     //User is signed in
   } else {
-    window.location.href = "./login.html";
+    window.location.href = "./index.html";
   }
 });
 
