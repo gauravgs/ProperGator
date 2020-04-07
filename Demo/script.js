@@ -93,7 +93,7 @@ video.addEventListener("play", () => {
 function findages() {
   console.log(
     "Children " + yng + " Young " + mid,
-    " Mid " + old + " Old " + superold + "at find ages"
+    " Mid " + old + " Old " + superold + "   at find ages"
   );
   console.log(detected, "detected aages");
   for (var a = 0; a < detected.length; a++) {
