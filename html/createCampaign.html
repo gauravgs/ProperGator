@@ -15,6 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.11.0/firebase-database.js"></script>
     <script src="../assets/js/auth.js"></script>
 
     <link rel="apple-touch-icon" href="../app-assets/images/ico/apple-icon-120.png">
@@ -167,7 +168,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Name*</span>
+                                                                    <span>Name</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <input type="text" id="name" class="form-control"
@@ -178,10 +179,11 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Campaign Thumbnail*</span>
+                                                                    <span>Campaign Thumbnail</span>
                                                                 </div>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" id="thumbnail" class="form-control"
+                                                                    <input type="text" id="thumbnail"
+                                                                        class="form-control"
                                                                         placeholder="Thumbnail URL">
                                                                 </div>
                                                             </div>
@@ -189,12 +191,35 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Type*</span>
+                                                                    <span>Additional Image 1</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="addimg1" class="form-control"
+                                                                        placeholder="Additional Image 1 URL">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Additional Image 2</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="addimg2" class="form-control"
+                                                                        placeholder="Additional Image 2 URL">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Type</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <select class="custom-select form-control"
                                                                         id="campaignType" name="campaign-type">
-                                                                        <option value="">--Select Campaign Type--</option>
+                                                                        <option value="">--Select Campaign Type--
+                                                                        </option>
                                                                         <option value="video">Video</option>
                                                                         <option value="image">Image</option>
                                                                     </select>
@@ -204,7 +229,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Source*</span>
+                                                                    <span>Source</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <input type="text" id="src" class="form-control"
@@ -215,12 +240,13 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Age Category*</span>
+                                                                    <span>Age Category</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <select class="custom-select form-control"
                                                                         id="ageCategory" name="Age Category">
-                                                                        <option value="">--Select Age Category--</option>
+                                                                        <option value="">--Select Age Category--
+                                                                        </option>
                                                                         <option value="1">1. Childern ( below 16 years)
                                                                         </option>
                                                                         <option value="2">2. Youngsters ( 16 to 30
@@ -236,7 +262,7 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Gender*</span>
+                                                                    <span>Gender Category</span>
                                                                 </div>
                                                                 <div class="col-md-8">
                                                                     <select class="custom-select form-control"
@@ -263,16 +289,41 @@
                                                         <div class="col-12">
                                                             <div class="form-group row">
                                                                 <div class="col-md-4">
-                                                                    <span>Product Link</span>
+                                                                    <span>Amazon Link</span>
                                                                 </div>
                                                                 <div class="col-md-8">
-                                                                    <input type="text" id="productLink" class="form-control"
-                                                                        name="Product Link" placeholder="Product Link">
+                                                                    <input type="text" id="amazonLink"
+                                                                        class="form-control" name="Amazon Link"
+                                                                        placeholder="Amazon Link">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="offset-md-11">
-                                                            <p style="color: red;">* Required</p>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Flipkart Link</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="flipkartLink"
+                                                                        class="form-control" name="Flipkart Link"
+                                                                        placeholder="Flipkart Link">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="form-group row">
+                                                                <div class="col-md-4">
+                                                                    <span>Description</span>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" id="description"
+                                                                        class="form-control" name="Description"
+                                                                        placeholder="Description">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="offset-md-10">
+                                                            <p style="color: red;">* All Fields Required</p>
                                                         </div>
                                                         <div class="col-md-8 offset-md-4">
                                                             <button type="submit" onclick="createCampaign()"
@@ -285,15 +336,10 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </section>
 
-
-
                 </section>
-                <!-- Dashboard Analytics end -->
-
             </div>
         </div>
     </div>
@@ -336,7 +382,7 @@
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="../app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <!-- <script src="../app-assets/js/scripts/pages/dashboard-analytics.js"></script> -->
     <!-- END: Page JS-->
 
 </body>

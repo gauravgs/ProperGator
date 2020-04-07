@@ -12,8 +12,8 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
-
-function logout(){
+const database = firebase.database();
+function logout() {
     localStorage.clear();
     auth.signOut();
 }
