@@ -68,12 +68,13 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="navigation-header"><span>Home</span></li>
-                <li class="active nav-item" id="home"><a href="#"><i class="feather icon-home"></i><span
+                <li class=" navigation-header"><span>Home</span></li>
+                <li class="nav-item" id="home"><a href="./dashboard.html"><i class="feather icon-home"></i><span
                             class="menu-title" data-i18n="Table">Dashboard</span></a>
                 </li>
-                <li class=" nav-item" id="createCampaign"><a href="#"><i class="feather icon-file"></i><span
-                            class="menu-title" data-i18n="Datatable">Create a Campaign</span></a>
+                <li class="nav-item" id="createCampaign"><a href="./createCampaign.html"><i
+                            class="feather icon-file"></i><span class="menu-title" data-i18n="Datatable">Create a
+                            Campaign</span></a>
                 </li>
                 <li class="navigation-header"><span>Campaigns</span></li>
             </ul>
@@ -148,25 +149,28 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Your Campaigns</h2>
+                        <h2 class="content-header-title float-left mb-0" id="campaignHeader"></h2>
                     </div>
                 </div>
             </div>
             <div class="content-body">
                 <!-- Dashboard Analytics Start -->
                 <section>
-
-                    <!-- Paste your content divs here    ****************************  -->
-
-                    <section id="basic-examples">
-                        <div class="row match-height" id="quick-card">
-
-
-                        </div>
-                    </section>
-
-
-
+                    <div>
+                        <center>
+                            <div class="col-md-10">
+                                <div class="card ">
+                                    <div class="card-header ">
+                                        <h5 class="card-title">Statistics</h5>
+                                        <p class="card-category">Since 20th January, 2020</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id=analyticsChart></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
                 </section>
                 <!-- Dashboard Analytics end -->
 
@@ -192,10 +196,8 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 
     <!--Dynamic Quick View-->
-    <script src="../assets/js/dashboard.js">
-
-
-    </script>
+    <script src="../assets/js/chartjs.min.js"></script>
+    <script src="../assets/js/campaignBoard.js"></script>
 
 
     <!-- BEGIN: Vendor JS-->

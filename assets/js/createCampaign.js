@@ -12,6 +12,24 @@ $('#viewCampaign').click(function () {
     window.location.href = './underConstruction.html';
 });
 
+$(document).ready(function () {
+    $.getJSON("https://propoback.herokuapp.com/getAd", function (data) {
+        var arr = [];
+        Object.keys(data).forEach(function (key) {
+            arr.push(data[key]);
+        });
+        arr.map(function (d) {
+            $("#main-menu-navigation").append(`
+                <li class="nav-item">
+                    <a href="javascript: campaignBoard('${d.uid}')"><i class="feather icon-circle"></i>
+                        <span class="menu-title" data-i18n="Datatable">${d.name}</span>
+                    </a>
+                </li>
+            `)
+        });
+    });
+});
+
 function createCampaign() {
     let name = document.getElementById('name').value;
     let thumbnail = document.getElementById('thumbnail').value;

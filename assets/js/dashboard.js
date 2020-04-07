@@ -22,21 +22,36 @@ $(document).ready(function () {
         ageGroup = "above 50 years";
       }
       $("#quick-card").append(`
-            <div class="col-sm-4">
-                <div class="card border-primary mb-3"">
-                    <div class="card-body">
-                        <h5 class="card-header mb-2"><b>${d.name}</b></h5>
-                        <img width="280" height="200"  style="margin-left: 25px;" src= ${d.thumbnail}></img>
-                        <br><br>
-                        <p class="card-text"><b>Campaign Source: </b><a href="${d.src}" target="_blank">Click here</a></p>
-                        <p class="card-text"><b>Age Group: </b>${ageGroup}</p>
-                        <p class="card-text"><b>Gender: </b>${d.gender}</p>
-                    </div>
-                </div>
-            </div>`);
+        <div class="col-sm-4">
+          <div class="card border-primary mb-3"">
+            <div class="card-body">
+              <h5 class="card-header mb-2"><b>${d.name}</b></h5>
+              <center>
+                <img width="280" height="200" src= ${d.thumbnail}></img>
+              </center>
+              <br><br>
+              <p class="card-text"><b>Campaign Source: </b><a href="${d.src}" target="_blank">Click here</a></p>
+              <p class="card-text"><b>Age Group: </b>${ageGroup}</p>
+              <p class="card-text"><b>Gender: </b>${d.gender}</p>
+            </div>
+          </div>
+        </div>
+      `);
+      $("#main-menu-navigation").append(`
+        <li class="nav-item">
+          <a href="javascript: campaignBoard('${d.uid}')"><i class="feather icon-circle"></i>
+            <span class="menu-title" data-i18n="Datatable">${d.name}</span>
+          </a>
+        </li>
+      `)
     });
   });
 });
+
+function campaignBoard(uid) {
+  localStorage.setItem('campaignBoardUID', uid);
+  window.location.href = "./campaignBoard.html";
+}
 
 auth.onAuthStateChanged((user) => {
   if (user) {
