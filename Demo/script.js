@@ -299,7 +299,7 @@ async function nextVid() {
           position: fixed;
           bottom: 60px;
           right: 20px;
-          opacity: 0.5;
+          opacity: 0.7
           z-index: 99;
         "
       >
@@ -313,7 +313,7 @@ async function nextVid() {
           position: fixed;
           bottom: 5px;
           right: 7px;
-          opacity: 0.5;
+          opacity: 0.7;
           z-index: 99;
         "
       />
@@ -344,7 +344,7 @@ async function nextVid() {
           position: fixed;
           bottom: 60px;
           right: 20px;
-          opacity: 0.5;
+          opacity: 0.7;
           z-index: 99;
         "
       >
@@ -358,14 +358,14 @@ async function nextVid() {
           position: fixed;
           bottom: 5px;
           right: 7px;
-          opacity: 0.5;
+          opacity: 0.7;
           z-index: 99;
         "
       />
       <h6 style="position:fixed;
             bottom:110px;
             left:27px;
-            opacity:0.5;
+            opacity:0.7;
             z-index:99;"> Scan Me</h6>
     <img
       id="barcode"
@@ -377,7 +377,7 @@ async function nextVid() {
       style="position:fixed;
             bottom:10px;
             left:10px;
-            opacity:0.7;
+            opacity:1.0;
             z-index:99;"
     />
      </div>`;
@@ -404,7 +404,7 @@ async function nextVid() {
         style="position:fixed;
             bottom:60px;
             right:20px;
-            opacity:0.5;
+            opacity:0.7;
             z-index:99;"
       >
         AGE
@@ -412,7 +412,7 @@ async function nextVid() {
  <h6 style="position:fixed;
             bottom:110px;
             left:27px;
-            opacity:0.5;
+            opacity:0.7;
             z-index:99;"> Scan Me</h6>
     <img
       <img
@@ -435,7 +435,7 @@ async function nextVid() {
       style="position:fixed;
             bottom:10px;
             left:10px;
-            opacity:0.7;
+            opacity:1.0;
             z-index:99;"
     />
      </div>
