@@ -39,8 +39,26 @@ $(document).ready(function () {
             }
         });
     });
-    //let uid = localStorage.getItem('campaignBoardUID');
-    let uid = "-M4JPFA4J5vQFOgD6jGw";
+
+    $.getJSON(`https://propogator-2cc09.firebaseio.com/.json`, function (d) {
+        console.log(d)
+        let uid = localStorage.getItem('campaignBoardUID');
+        let data = d.Ad[uid];
+        console.log(data);
+        if (data.hasOwnProperty("Analytics")) {
+            createAnalytics(uid);
+        } else {
+            let views = { cat1: 0, cat2: 0, cat3: 0, cat4: 0 };
+            let gender = { males: 0, females: 0, others: 0 };
+            let count = 0;
+            createviewsPie(count)
+            createViewsBar(views);
+            createGenderPie(gender);
+        }
+    });
+});
+
+function createAnalytics(uid) {
     database.ref().child("Ad").child(uid).child("Analytics").on('value', function (d) {
         let data = d.val();
         var arr = [];
@@ -74,10 +92,13 @@ $(document).ready(function () {
         });
         let views = { cat1: cat1, cat2: cat2, cat3: cat3, cat4: cat4 };
         let gender = { males: males, females: females, others: others };
+        let count = arr.length;
+        console.log(count);
+        createviewsPie(count)
         createViewsBar(views);
         createGenderPie(gender);
     });
-});
+}
 
 function campaignBoard(uid) {
     localStorage.setItem('campaignBoardUID', uid);
@@ -86,6 +107,32 @@ function campaignBoard(uid) {
 
 function loadUI(data) {
     $("#campaignHeader").text(data.name);
+}
+
+function createviewsPie(count) {
+    $('#viewsCount').text(count);
+    let ctx = document.getElementById('viewsPie').getContext("2d");
+
+    myChart = new Chart(ctx, {
+        type: 'pie',
+
+        data: {
+            datasets: [{
+                backgroundColor: ["#6D62E5"],
+                data: [count]
+            }],
+            labels: ["Views"]
+        },
+        options: {
+            legend: {
+                display: true
+            },
+
+            tooltips: {
+                enabled: true
+            },
+        }
+    });
 }
 
 function createViewsBar(views) {
