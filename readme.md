@@ -64,9 +64,8 @@
 - Feel free to add issues and submit patches.
   
 ## Authors
-  - Atharva Udapure - [atharvau](https://github.com/atharvau)
   - Nikhil Sahu - [nikhildsahu](https://github.com/nikhildsahu)
   - Gaurav Sharma - [gauravgs](https://github.com/gauravgs)
+  - Atharva Udapure - [atharvau](https://github.com/atharvau)
+  - Jigyasu Prakash  - [JigyasuPrakash](https://github.com/JigyasuPrakash)
   
-
-
