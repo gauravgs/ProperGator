@@ -52,11 +52,10 @@
 
 ## Demo
 
-
+[![](https://github.com/gauravgs/ProperGator/blob/master/demo.PNG)](http://www.youtube.com/watch?v=_G4En-zcT_0 "Propergator Demo ")
 
 
 ----------------------------------------------------- 
-## Implementation
 
 
 
@@ -68,4 +67,6 @@
   - Atharva Udapure - [atharvau](https://github.com/atharvau)
   - Nikhil Sahu - [nikhildsahu](https://github.com/nikhildsahu)
   - Gaurav Sharma - [gauravgs](https://github.com/gauravgs)
+  
+
 
